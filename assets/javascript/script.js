@@ -110,5 +110,45 @@ $(document).ready(function(){
         });
     }
 
-    
+    function renderCitiesList(response) {
+        var listSection = $(".list-group");
+        $("#search-form").append(listSection);
+
+        var listItems = $("<li>");
+        listItems.addClass("list-group-item");
+        listItems.text(response.name)
+
+        listSection.prepend(listItems);
+    }
+
+    listSection.click(function(e){
+        e.preventDefault();
+        console.log("click")
+
+        elData = $(e.target).text();
+        city.val('')
+
+        currentWeather(elData, true)
+        futureWeather(elData)
+    });
+
+
+function futureWeather(city) {
+    var dayCount = "&cnt=40"
+
+    var queryUrlForecast = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + dayCount + authKey;
+    $.ajax({
+        url: queryUrlForecast,
+        method: "GET"
+    }).then(function(data){
+        console.log(data)
+
+        searchedForecasts.forecasts.push(data)
+        sessionStorage.setItem("lastForecast", JSON.stringify(searchedForecasts));
+
+        renderForecast(data)
+    });
+}
+
+function renderForecast(data)
 })
