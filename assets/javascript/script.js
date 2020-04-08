@@ -68,11 +68,13 @@ $(document).ready(function(){
             renderCitiesList(response)
         }
 
+        // Creates the city name.
         var cityTitle = $("<h3>")
         cityTitle.addClass("card-title")
         cityTitle.text(`${response.name} (${moment().formast("L")})`)
         $("#main-card").append(cityTitle)
 
+        // Creates a text tag to display temperature.
         var temperature = response.main.temp
         var currentTemp = $("<p>");
         currentTemp.addClass("temperature");
@@ -82,12 +84,31 @@ $(document).ready(function(){
         cityTitle.append(currentTemp)
         console.log(temp)
 
+        // Creates a text tag to display the humidity.
         var currentHumidity = $("<p>");
         currentHumidity.addClass("humidity");
         currentHumidity.html(`Humidity: ${response.main.humidity} %`);
         currentTemp.append(currentHumidity)
         console.log(response.main.humidity)
 
-        
+        // Creates a text tag to display the wind speed.
+        var windSpeed = $("<p>")
+        windSpeed.addClass("wind-speed");
+        windSpeed.html(`Wind Speed: ${response.wind.speed} MPH`);
+        currentHumidity.append(windSpeed)
+        console.log(response.wind.speed)
+
+        var queryURLuv = `api.openweathermap.org/data/2.5/uvi/forecast?${authKey}&lat=${response.coord.lat}&lon=${response.coord.lon}&cnt=1`
+        $.ajax({
+            url: queryURLuv,
+            method: "GET"
+        }).then(function(resp){
+            var uvIndex = $("<p>");
+            uvIndex.addClass("uv-index");
+            uvIndex.text("UV Index: " + resp[0].value)
+            windSpeed.append(uvIndex);
+        });
     }
+
+    
 })
