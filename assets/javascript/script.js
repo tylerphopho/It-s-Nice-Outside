@@ -60,4 +60,34 @@ $(document).ready(function(){
         });
     }
 
+
+    function renderWeather(response, fromStorage) {
+        $("#main-card").empty()
+
+        if(!fromStorage) {
+            renderCitiesList(response)
+        }
+
+        var cityTitle = $("<h3>")
+        cityTitle.addClass("card-title")
+        cityTitle.text(`${response.name} (${moment().formast("L")})`)
+        $("#main-card").append(cityTitle)
+
+        var temperature = response.main.temp
+        var currentTemp = $("<p>");
+        currentTemp.addClass("temperature");
+        var t = temperature.toString()
+        var temp = t.slice(0,4)
+        currentTemp.html(`Temperature: ${temp} &#176; F`);
+        cityTitle.append(currentTemp)
+        console.log(temp)
+
+        var currentHumidity = $("<p>");
+        currentHumidity.addClass("humidity");
+        currentHumidity.html(`Humidity: ${response.main.humidity} %`);
+        currentTemp.append(currentHumidity)
+        console.log(response.main.humidity)
+
+        
+    }
 })
