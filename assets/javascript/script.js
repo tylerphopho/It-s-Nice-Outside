@@ -2,7 +2,7 @@
 var authKey = "&appid=32e1c02add4067945d7c6604f73cc6cd"
 
 // URL 
-var queryURL = "api.openweathermap.org/data/2.5/weather?q="
+var queryBase = "api.openweathermap.org/data/2.5/weather?q="
 var listSection = $(".list-group")
 var city = $("#search-city")
 
@@ -32,7 +32,32 @@ $(document).ready(function(){
                 })
             }
         }
+
+        if(forecast) {
+            forecast = JSON.parse(forecast);
+            searchedForecasts = forecast;
+            console.log(cities, forecast)
+            if(forecast.forecasts.length > 0) {
+                renderForecast(forecast.forecasts[0])
+            }
+        }
     }
 
-    
+    getSession()
+
+    function currentWeather(city, fromStorage) {
+        var queryURL = queryUrlBase + city + "&units=imperial" + authKey;
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response){
+            searchedCities.cities.push(response)
+            sessionStorage.setItem("lastOverview", JSON.stringify(searchedCities));
+            console.log(searchedCities)
+
+            renderWeather(response, fromStorage)
+        });
+    }
+
 })
