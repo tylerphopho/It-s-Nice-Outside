@@ -150,5 +150,47 @@ function futureWeather(city) {
     });
 }
 
-function renderForecast(data)
-})
+function renderForecast(data) {
+    // Empties current cards on page
+    $(".card-deck").empty()
+    
+    // Loops through 5 day forecast
+    for(var i = 0; i < data.list.length; i+= 8) {
+        console.log(data.list[i].length.main.temp)
+
+        // Creates cards for the 5 day forecast
+        var card = $("<div>");
+        card.addClass("card");
+        $(".card-deck").append(card)
+        var cardBody = $("<div>");
+        cardBody.addClass("card-body days");
+        card.append(cardBody);
+
+        // Creates <p> tag to display the date
+        var forecastDate = $("<p>");
+        forecastDate.addClass("forecase-date")
+        forecastDate.html(`${moment(data.list[i].dt_txt).format("L")}`)
+        cardBody.append(forecastDate)
+
+        var forecastTemperature = $("<p>");
+        forecastTemperature.addClass("forecast-temp")
+        forecastTemperature.html(`Temp: ${data.list[i].main.temp} &#176;F`)
+        forecastDate.append(forecastTemperature)
+
+        var forecastHumidiity
+        forecastHumidiity.html(`Humidity: ${data.list[i].main.humidity} %`);
+        forecastTemperature.append(forecastHumidiity);
+
+        var forecastIcon = $(`<img src="http://openweather.org/img/w/${data.list[i].weather[0].icon}.png" alt="icon">`);
+        forecastTemperature(forecastIcon)
+        }
+    }
+
+    $("#searchButton").on("click", function(e){
+        e.preventDefault()
+        var city = $("#search-city").val().trim()
+
+        currentWeather(city);
+        futureWeather(city);
+    });
+});
