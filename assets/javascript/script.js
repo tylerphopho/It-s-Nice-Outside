@@ -46,7 +46,7 @@ $(document).ready(function(){
     getSession()
 
     function currentWeather(city, fromStorage) {
-        var queryURL = queryUrlBase + city + "&units=imperial" + authKey;
+        var queryURL = queryBase + city + "&units=imperial" + authKey;
 
         $.ajax({
             url: queryURL,
@@ -156,7 +156,7 @@ function renderForecast(data) {
     
     // Loops through 5 day forecast
     for(var i = 0; i < data.list.length; i+= 8) {
-        console.log(data.list[i].length.main.temp)
+        console.log(data.list[i].main.temp)
 
         // Creates cards for the 5 day forecast
         var card = $("<div>");
