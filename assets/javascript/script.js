@@ -181,7 +181,7 @@ function renderForecast(data) {
         forecastHumidiity.html(`Humidity: ${data.list[i].main.humidity} %`);
         forecastTemperature.append(forecastHumidiity);
 
-        var forecastIcon = $(`<img src="http://openweather.org/img/w/${data.list[i].weather[0].icon}.png" alt="icon">`);
+        var forecastIcon = $(`<img src="http://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png" alt="icon">`);
         forecastTemperature.append(forecastIcon)
         }
     }
