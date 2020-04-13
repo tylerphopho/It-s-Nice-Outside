@@ -1,0 +1,21 @@
+body {
+    background:url('../img/weather-photo.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+    position: relative;
+}
+
+#header {
+    background-color: #f5f5f5;
+    color: black;
+}
+
+.days {
+    background-color: #4287f5;
+    color: white;
+}
+
+h2 {
+    background-color: white;
+}
