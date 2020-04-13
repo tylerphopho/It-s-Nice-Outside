@@ -168,7 +168,7 @@ function renderForecast(data) {
 
         // Creates <p> tag to display the date
         var forecastDate = $("<p>");
-        forecastDate.addClass("forecase-date")
+        forecastDate.addClass("forecast-date")
         forecastDate.html(`${moment(data.list[i].dt_txt).format("L")}`);
         cardBody.append(forecastDate)
 
@@ -177,12 +177,12 @@ function renderForecast(data) {
         forecastTemperature.html(`Temp: ${data.list[i].main.temp} &#176;F`);
         forecastDate.append(forecastTemperature)
 
-        var forecastHumidiity
+        var forecastHumidiity = $("<p>")
         forecastHumidiity.html(`Humidity: ${data.list[i].main.humidity} %`);
         forecastTemperature.append(forecastHumidiity);
 
         var forecastIcon = $(`<img src="http://openweather.org/img/w/${data.list[i].weather[0].icon}.png" alt="icon">`);
-        forecastTemperature(forecastIcon)
+        forecastTemperature.append(forecastIcon)
         }
     }
 
