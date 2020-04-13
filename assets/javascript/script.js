@@ -169,12 +169,12 @@ function renderForecast(data) {
         // Creates <p> tag to display the date
         var forecastDate = $("<p>");
         forecastDate.addClass("forecase-date")
-        forecastDate.html(`${moment(data.list[i].dt_txt).format("L")}`)
+        forecastDate.html(`${moment(data.list[i].dt_txt).format("L")}`);
         cardBody.append(forecastDate)
 
         var forecastTemperature = $("<p>");
         forecastTemperature.addClass("forecast-temp")
-        forecastTemperature.html(`Temp: ${data.list[i].main.temp} &#176;F`)
+        forecastTemperature.html(`Temp: ${data.list[i].main.temp} &#176;F`);
         forecastDate.append(forecastTemperature)
 
         var forecastHumidiity
