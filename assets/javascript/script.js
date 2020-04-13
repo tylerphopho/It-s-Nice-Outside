@@ -2,7 +2,7 @@
 var authKey = "&appid=32e1c02add4067945d7c6604f73cc6cd"
 
 // URL 
-var queryBase = "api.openweathermap.org/data/2.5/weather?q="
+var queryBase = "http://api.openweathermap.org/data/2.5/weather?q="
 var listSection = $(".list-group")
 var city = $("#search-city")
 
@@ -26,6 +26,7 @@ $(document).ready(function(){
             cities = JSON.parse(cities);
             searchedCities = cities
             if(cities.cities.length > 0) {
+
                 renderWeather(cities.cities[0], true)
                 cities.cities.forEach(function(index){
                     renderCitiesList(index)
@@ -69,9 +70,9 @@ $(document).ready(function(){
         }
 
         // Creates the city name.
-        var cityTitle = $("<h3>")
-        cityTitle.addClass("card-title")
-        cityTitle.text(`${response.name} (${moment().formast("L")})`)
+        var cityTitle = $("<h3>");
+        cityTitle.addClass("card-title");
+        cityTitle.text(` ${response.name} (${moment().format("L")})`)
         $("#main-card").append(cityTitle)
 
         // Creates a text tag to display temperature.
@@ -98,7 +99,7 @@ $(document).ready(function(){
         currentHumidity.append(windSpeed)
         console.log(response.wind.speed)
 
-        var queryURLuv = `api.openweathermap.org/data/2.5/uvi/forecast?${authKey}&lat=${response.coord.lat}&lon=${response.coord.lon}&cnt=1`
+        var queryURLuv = `http://api.openweathermap.org/data/2.5/uvi/forecast?${authKey}&lat=${response.coord.lat}&lon=${response.coord.lon}&cnt=1`
         $.ajax({
             url: queryURLuv,
             method: "GET"
