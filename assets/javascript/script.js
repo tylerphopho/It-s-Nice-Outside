@@ -2,7 +2,7 @@
 var authKey = "&appid=32e1c02add4067945d7c6604f73cc6cd"
 
 // URL 
-var queryBase = "http://api.openweathermap.org/data/2.5/weather?q="
+var queryBase = "https://api.openweathermap.org/data/2.5/weather?q="
 var listSection = $(".list-group")
 var city = $("#search-city")
 
@@ -99,7 +99,7 @@ $(document).ready(function(){
         currentHumidity.append(windSpeed)
         console.log(response.wind.speed)
 
-        var queryURLuv = `http://api.openweathermap.org/data/2.5/uvi/forecast?${authKey}&lat=${response.coord.lat}&lon=${response.coord.lon}&cnt=1`
+        var queryURLuv = `https://api.openweathermap.org/data/2.5/uvi/forecast?${authKey}&lat=${response.coord.lat}&lon=${response.coord.lon}&cnt=1`
         $.ajax({
             url: queryURLuv,
             method: "GET"
@@ -137,7 +137,7 @@ $(document).ready(function(){
 function futureWeather(city) {
     var dayCount = "&cnt=40"
 
-    var queryUrlForecast = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + dayCount + authKey;
+    var queryUrlForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + dayCount + authKey;
     $.ajax({
         url: queryUrlForecast,
         method: "GET"
@@ -182,7 +182,7 @@ function renderForecast(data) {
         forecastHumidiity.html(`Humidity: ${data.list[i].main.humidity} %`);
         forecastTemperature.append(forecastHumidiity);
 
-        var forecastIcon = $(`<img src="http://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png" alt="icon">`);
+        var forecastIcon = $(`<img src="https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png" alt="icon">`);
         forecastTemperature.append(forecastIcon)
         }
     }
